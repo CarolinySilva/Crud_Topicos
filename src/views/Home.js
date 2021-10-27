@@ -12,7 +12,7 @@ function Home() {
             <hr className="my-4"/>
          
             <p className="lead">
-            < Link className="btn btn-primary btn-lg" to="/cadastro-produtos" role="button">Cadastrar</Link>
+            < Link className="btn btn-primary btn-lg" to="/cadastro-topicos" role="button">Cadastrar</Link>
             </p>
         </div>
     );

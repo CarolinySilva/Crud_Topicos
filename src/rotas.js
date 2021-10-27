@@ -2,9 +2,9 @@ import React from "react";
 import { Switch,Route } from "react-router-dom";
 
 import Home from "./views/Home";
-import CadastroProdutos from "./views/produtos/Cadastro";
+import CadastroTopicos from "./views/topicos/Cadastro";
 
-import ConsultaProdutos from "./views/produtos/Consulta";
+import ConsultaTopicos from "./views/topicos/Consulta";
 
 
 export default () => {
@@ -12,8 +12,8 @@ export default () => {
         <>
             
                 <Switch>
-                    <Route exact path="/cadastro-produtos/:sku?" component={CadastroProdutos}/>
-                    <Route exact path="/consulta-produtos" component={ConsultaProdutos}/>
+                    <Route exact path="/cadastro-topicos/:tipo?" component={CadastroTopicos}/>
+                    <Route exact path="/consulta-topicos" component={ConsultaTopicos}/>
                     <Route exact path="/" component={Home}/>
                     
 

@@ -1,18 +1,16 @@
 import React from "react";
 
-import ProdutoService from "../../app/produtoService";
+import TopicoService from "../../app/topicoService";
 import {withRouter} from 'react-router-dom'
  
 
 
-class CadastroProdutos extends React.Component{
+class CadastroTopicos extends React.Component{
 
         state = {
             nome:'',
-            sku:'',
+            tipo:'',
             descricao:'',
-            preco:0,
-            fornecedor:'',
             sucesso: false,
             errors:[],
             atualizando: false
@@ -20,7 +18,7 @@ class CadastroProdutos extends React.Component{
 
         constructor (){
             super()
-            this.service = new ProdutoService()
+            this.service = new TopicoService()
         }
 
         onChange = (event)=>{
@@ -33,10 +31,8 @@ class CadastroProdutos extends React.Component{
 
             const topico = {
                 nome: this.state.nome,
-                sku: this.state.sku,
+                tipo: this.state.tipo,
                 descricao: this.state.descricao,
-                preco: this.state.preco,
-                fornecedor:this.state.fornecedor,
             }
                 try{
                     this.service.salvar(topico)
@@ -55,18 +51,16 @@ class CadastroProdutos extends React.Component{
         limpaCampos = ()=> {
             this.setState ({
             nome:'',
-            sku:'',
+            tipo:'',
             descricao:'',
-            preco:0,
-            fornecedor:''
             });
         }
 
         componentDidMount(){
-          const sku =  this.props.match.params.sku
+          const tipo =  this.props.match.params.tipo
 
-          if (sku){
-            const resultado = this.service.obterProdutos().filter(topico => topico.sku === sku)
+          if (tipo){
+            const resultado = this.service.obterTopicos().filter(topico => topico.tipo === tipo)
             if (resultado.length === 1){
               const produtoEncontrado = resultado[0]
                this.setState({...produtoEncontrado , atualizando: true})
@@ -127,12 +121,12 @@ class CadastroProdutos extends React.Component{
 
                         <div className="col-md-6">
                         <div className="form-group">
-                                <label htmlFor=""> SKU: *</label>
+                                <label htmlFor=""> Tipo: </label>
                                 <input type="text"
-                                 name="sku"
+                                 name="tipo"
                                  disabled={this.state.atualizando}
                                  onChange = {this.onChange}
-                                value={this.state.sku}  
+                                value={this.state.tipo}  
                                 className="form-control" />
                             </div>
                         </div>
@@ -154,34 +148,6 @@ class CadastroProdutos extends React.Component{
                             </div>
                         </div>
                     </div>
-
-                    <div className="row">
-                        <div className="col-md-6">
-
-                            <div className="form-group">
-                                <label > Preço: *</label>
-                                <input type="text" 
-                                value={this.state.preco} 
-                                name="preco" 
-                                onChange = {this.onChange}
-                                className="form-control" />
-                            </div>
-
-                        </div>
-
-                        <div className="col-md-6">
-
-                            <div className="form-group">
-                                <label > Fornecedor: *</label>
-                                <input type="text"
-                                 name="fornecedor" 
-                                 onChange = {this.onChange}
-                                 value={this.state.fornecedor} 
-                                 className="form-control" />
-                            </div>
-
-                        </div>
-                    </div>   
 
                     <div className="row mt-3">
 
@@ -208,4 +174,4 @@ class CadastroProdutos extends React.Component{
 
 
 
-export default  withRouter (CadastroProdutos);
+export default  withRouter (CadastroTopicos);

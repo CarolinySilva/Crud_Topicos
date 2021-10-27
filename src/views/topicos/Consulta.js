@@ -1,10 +1,10 @@
 import React from "react";
 
-import ProdutoService from '../../app/produtoService'
+import TopicosService from '../../app/topicoService'
 
 import { withRouter } from "react-router";
 
-class ConsultaProdutos extends React.Component{
+class ConsultTopicos extends React.Component{
 
 
     state = {
@@ -13,20 +13,20 @@ class ConsultaProdutos extends React.Component{
 
     constructor(){
         super()
-        this.service = new ProdutoService();
+        this.service = new TopicosService();
     }
 
     componentDidMount(){
-        const topicos = this.service.obterProdutos()
+        const topicos = this.service.obterTopicos()
         this.setState({topicos})
     }
 
-    preparaEditar = (sku) => {
-        this.props.history.push(`/cadastro-topicos/${sku}`)
+    preparaEditar = (tipo) => {
+        this.props.history.push(`/cadastro-topicos/${tipo}`)
     }
 
-    deletar = (sku) => {
-       const topicos =  this.service.deletar(sku)
+    deletar = (tipo) => {
+       const topicos =  this.service.deletar(tipo)
        this.setState({topicos})
     }
 
@@ -43,10 +43,8 @@ class ConsultaProdutos extends React.Component{
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>SKU</th>
-                            <th>Preço</th>
-                            <th>Fornecedor</th>
-                            <th></th>
+                            <th>Tipo</th>
+                            <th>Ações</th>
                             
                         </tr>
                     </thead>
@@ -57,13 +55,11 @@ class ConsultaProdutos extends React.Component{
                         return (
                         <tr key={index}>
                             <th>{topico.nome}</th>
-                            <th> {topico.sku} </th>
-                            <th> {topico.preco} </th>
-                            <th> {topico.fornecedor} </th>
+                            <th> {topico.tipo} </th>
                             <th>
-                        <button onClick={ ()=> this.preparaEditar(topico.sku)} className="btn  btn-primary mx-2 px-4"> Editar</button>
+                        <button onClick={ ()=> this.preparaEditar(topico.tipo)} className="btn  btn-primary mx-2 px-4"> Editar</button>
 
-                        <button onClick={() => this.deletar(topico.sku)}
+                        <button onClick={() => this.deletar(topico.tipo)}
                          className="btn btn-danger"> Remover</button>
                             </th>
                             
@@ -84,4 +80,4 @@ class ConsultaProdutos extends React.Component{
     
 }
 
-export default withRouter(ConsultaProdutos);
+export default withRouter(ConsultTopicos);
